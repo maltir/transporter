@@ -41,7 +41,8 @@ func (w *Writer) Write(msg message.Msg) func(client.Session) (message.Msg, error
 			return msg, nil
 		}
 		if err := writeFunc(msg, s.(*Session).pqSession); err != nil {
-			return nil, err
+			log.Infof("an ERROR occured, %s",err)
+			//return nil, err
 		}
 		if msg.Confirms() != nil {
 			msg.Confirms() <- struct{}{}
